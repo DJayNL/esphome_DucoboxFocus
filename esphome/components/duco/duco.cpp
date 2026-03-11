@@ -171,17 +171,22 @@ void Duco::debug_hex_(std::vector<uint8_t> bytes, uint8_t separator) {
   delay(10);
 }
 
+const std::string DucoDiscovery::NODE_TYPE_DTWV = "DTWV";
 const std::string DucoDiscovery::NODE_TYPE_UCBAT = "UCBAT";
 const std::string DucoDiscovery::NODE_TYPE_UC = "UC";
 const std::string DucoDiscovery::NODE_TYPE_UCRH = "UCRH";
 const std::string DucoDiscovery::NODE_TYPE_UCCO2 = "UCCO2";
 const std::string DucoDiscovery::NODE_TYPE_VLV = "VLV";
+const std::string DucoDiscovery::NODE_TYPE_VLVRH = "VLVRH";
+const std::string DucoDiscovery::NODE_TYPE_VLVCO2 = "VLVCO2";
 const std::string DucoDiscovery::NODE_TYPE_BOX = "BOX";
 const std::string DucoDiscovery::NODE_TYPE_SWITCH = "SWITCH";
 const std::string DucoDiscovery::NODE_TYPE_UNKNOWN = "UNKNOWN";
 
 std::string friendly_node_type(uint8_t type_code) {
   switch (type_code) {
+    case DucoDiscovery::NODE_TYPE_CODE_DTWV:
+      return DucoDiscovery::NODE_TYPE_DTWV;
     case DucoDiscovery::NODE_TYPE_CODE_UCBAT:
       return DucoDiscovery::NODE_TYPE_UCBAT;
     case DucoDiscovery::NODE_TYPE_CODE_UC:
@@ -192,6 +197,10 @@ std::string friendly_node_type(uint8_t type_code) {
       return DucoDiscovery::NODE_TYPE_UCCO2;
     case DucoDiscovery::NODE_TYPE_CODE_VLV:
       return DucoDiscovery::NODE_TYPE_VLV;
+    case DucoDiscovery::NODE_TYPE_CODE_VLVRH:
+      return DucoDiscovery::NODE_TYPE_VLVRH;
+    case DucoDiscovery::NODE_TYPE_CODE_VLVCO2:
+      return DucoDiscovery::NODE_TYPE_VLVCO2;
     case DucoDiscovery::NODE_TYPE_CODE_BOX:
       return DucoDiscovery::NODE_TYPE_BOX;
     case DucoDiscovery::NODE_TYPE_CODE_SWITCH:
