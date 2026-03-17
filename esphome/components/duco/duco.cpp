@@ -259,7 +259,7 @@ std::string friendly_node_type(uint8_t type_code) {
 			return DucoDiscovery::NODE_TYPE_PERILEX;
 		case DucoDiscovery::NODE_TYPE_CODE_RELAY_OUT:
 			return DucoDiscovery::NODE_TYPE_RELAY_OUT;    
-    case DucoDiscovery::NODE_TYPE_UNKNOWN;
+    case DucoDiscovery::NODE_TYPE_UNKNOWN:
 			return DucoDiscovery::NODE_TYPE_UNKNOWN;   
     
     default:
