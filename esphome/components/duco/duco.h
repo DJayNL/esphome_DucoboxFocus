@@ -129,7 +129,6 @@ class DucoDiscovery : public DucoDevice, public PollingComponent {
   static const std::string NODE_TYPE_VLVCO2;
   static const std::string NODE_TYPE_BOX;
   static const std::string NODE_TYPE_SWITCH;
-  static const std::string NODE_TYPE_UNKNOWN;
   static const std::string NODE_TYPE_IAV;
   static const std::string NODE_TYPE_IAV_RH;
   static const std::string NODE_TYPE_IAV_CO2;
