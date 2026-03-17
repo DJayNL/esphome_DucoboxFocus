@@ -148,7 +148,6 @@ class DucoDiscovery : public DucoDevice, public PollingComponent {
   static const std::string NODE_TYPE_PERILEX;
   static const std::string NODE_TYPE_RELAY_OUT;
 
-  static const uint8_t NODE_TYPE_UNKNOWN= 0;
   static const uint8_t NODE_TYPE_CODE_DTWV = 7;
   static const uint8_t NODE_TYPE_CODE_UCBAT = 8;
   static const uint8_t NODE_TYPE_CODE_UC = 9;
