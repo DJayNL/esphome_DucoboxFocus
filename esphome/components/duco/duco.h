@@ -118,6 +118,7 @@ class DucoDiscovery : public DucoDevice, public PollingComponent {
 
   void receive_response(const DucoMessage &message) override;
 
+  static const std::string NODE_TYPE_UNKNOWN;
   static const std::string NODE_TYPE_DTWV;
   static const std::string NODE_TYPE_UCBAT;
   static const std::string NODE_TYPE_UC;
@@ -129,8 +130,26 @@ class DucoDiscovery : public DucoDevice, public PollingComponent {
   static const std::string NODE_TYPE_BOX;
   static const std::string NODE_TYPE_SWITCH;
   static const std::string NODE_TYPE_UNKNOWN;
+  static const std::string NODE_TYPE_IAV;
+  static const std::string NODE_TYPE_IAV_RH;
+  static const std::string NODE_TYPE_IAV_CO2;
+  static const std::string NODE_TYPE_CTRL_UNIT;
+  static const std::string NODE_TYPE_CO2_RH_VLV;
+  static const std::string NODE_TYPE_UC_SUN;
+  static const std::string NODE_TYPE_UC_VC;
+  static const std::string NODE_TYPE_MULTI_ZONE;
+  static const std::string NODE_TYPE_BOX_RH;
+  static const std::string NODE_TYPE_BOX_CO2;
+  static const std::string NODE_TYPE_RELAY;
+  static const std::string NODE_TYPE_WEATHER;
+  static const std::string NODE_TYPE_MOTOR_MODBUS;
+  static const std::string NODE_TYPE_DIGITAL_IN;
+  static const std::string NODE_TYPE_DIGITAL_OUT;
+  static const std::string NODE_TYPE_RELAY_MODBUS;
+  static const std::string NODE_TYPE_PERILEX;
+  static const std::string NODE_TYPE_RELAY_OUT;
 
-  
+  static const uint8_t NODE_TYPE_UNKNOWN= 0;
   static const uint8_t NODE_TYPE_CODE_DTWV = 7;
   static const uint8_t NODE_TYPE_CODE_UCBAT = 8;
   static const uint8_t NODE_TYPE_CODE_UC = 9;
@@ -141,6 +160,25 @@ class DucoDiscovery : public DucoDevice, public PollingComponent {
   static const uint8_t NODE_TYPE_CODE_VLVC02 = 16;
   static const uint8_t NODE_TYPE_CODE_BOX = 17;
   static const uint8_t NODE_TYPE_CODE_SWITCH = 18;
+  static const uint8_t NODE_TYPE_CODE_IAV = 22;
+  static const uint8_t NODE_TYPE_CODE_IAV_RH = 23;
+  static const uint8_t NODE_TYPE_CODE_IAV_CO2 = 25;
+  static const uint8_t NODE_TYPE_CODE_CTRL_UNIT = 27;
+  static const uint8_t NODE_TYPE_CODE_CO2_RH_VLV = 28;
+  static const uint8_t NODE_TYPE_CODE_UC_SUN = 29;
+  static const uint8_t NODE_TYPE_CODE_UC_VC = 30;
+  static const uint8_t NODE_TYPE_CODE_MULTI_ZONE = 31;
+  static const uint8_t NODE_TYPE_CODE_BOX_RH = 35;
+  static const uint8_t NODE_TYPE_CODE_BOX_CO2 = 37;
+  static const uint8_t NODE_TYPE_CODE_RELAY = 38;
+  static const uint8_t NODE_TYPE_CODE_WEATHER = 39;
+  static const uint8_t NODE_TYPE_CODE_MOTOR_MODBUS = 40;
+  static const uint8_t NODE_TYPE_CODE_DIGITAL_IN = 41;
+  static const uint8_t NODE_TYPE_CODE_DIGITAL_OUT = 42;
+  static const uint8_t NODE_TYPE_CODE_RELAY_MODBUS = 44;
+  static const uint8_t NODE_TYPE_CODE_PERILEX = 45;
+  static const uint8_t NODE_TYPE_CODE_RELAY_OUT = 46;
+
 
  protected:
   // start with a delay of 1000 loops
