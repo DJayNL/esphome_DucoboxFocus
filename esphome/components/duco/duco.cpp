@@ -182,6 +182,24 @@ const std::string DucoDiscovery::NODE_TYPE_VLVCO2 = "VLVCO2";
 const std::string DucoDiscovery::NODE_TYPE_BOX = "BOX";
 const std::string DucoDiscovery::NODE_TYPE_SWITCH = "SWITCH";
 const std::string DucoDiscovery::NODE_TYPE_UNKNOWN = "UNKNOWN";
+const std::string DucoDiscovery::NODE_TYPE_IAV = "IAV";
+const std::string DucoDiscovery::NODE_TYPE_IAV_RH = "IAV_RH";
+const std::string DucoDiscovery::NODE_TYPE_IAV_CO2 = "IAV_CO2";
+const std::string DucoDiscovery::NODE_TYPE_CTRL_UNIT = "CTRL_UNIT";
+const std::string DucoDiscovery::NODE_TYPE_CO2_RH_VLV = "CO2_RH_VLV";
+const std::string DucoDiscovery::NODE_TYPE_UC_SUN = "UC_SUN";
+const std::string DucoDiscovery::NODE_TYPE_UC_VC = "UC_VC";
+const std::string DucoDiscovery::NODE_TYPE_MULTI_ZONE = "MULTI_ZONE";
+const std::string DucoDiscovery::NODE_TYPE_BOX_RH = "BOX_RH";
+const std::string DucoDiscovery::NODE_TYPE_BOX_CO2 = "BOX_CO2";
+const std::string DucoDiscovery::NODE_TYPE_RELAY = "RELAY";
+const std::string DucoDiscovery::NODE_TYPE_WEATHER = "WEATHER";
+const std::string DucoDiscovery::NODE_TYPE_MOTOR_MODBUS = "MOTOR_MODBUS";
+const std::string DucoDiscovery::NODE_TYPE_DIGITAL_IN = "DIGITAL_IN";
+const std::string DucoDiscovery::NODE_TYPE_DIGITAL_OUT = "DIGITAL_OUT";
+const std::string DucoDiscovery::NODE_TYPE_RELAY_MODBUS = "RELAY_MODBUS";
+const std::string DucoDiscovery::NODE_TYPE_PERILEX = "PERILEX";
+const std::string DucoDiscovery::NODE_TYPE_RELAY_OUT = "RELAY_OUT";
 
 std::string friendly_node_type(uint8_t type_code) {
   switch (type_code) {
@@ -205,6 +223,45 @@ std::string friendly_node_type(uint8_t type_code) {
       return DucoDiscovery::NODE_TYPE_BOX;
     case DucoDiscovery::NODE_TYPE_CODE_SWITCH:
       return DucoDiscovery::NODE_TYPE_SWITCH;
+		case DucoDiscovery::NODE_TYPE_CODE_IAV:
+			return DucoDiscovery::NODE_TYPE_IAV;
+		case DucoDiscovery::NODE_TYPE_CODE_IAV_RH:
+			return DucoDiscovery::NODE_TYPE_IAV_RH;
+		case DucoDiscovery::NODE_TYPE_CODE_IAV_CO2:
+			return DucoDiscovery::NODE_TYPE_IAV_CO2;
+		case DucoDiscovery::NODE_TYPE_CODE_CTRL_UNIT:
+			return DucoDiscovery::NODE_TYPE_CTRL_UNIT;
+		case DucoDiscovery::NODE_TYPE_CODE_CO2_RH_VLV:
+			return DucoDiscovery::NODE_TYPE_CO2_RH_VLV;
+		case DucoDiscovery::NODE_TYPE_CODE_UC_SUN:
+			return DucoDiscovery::NODE_TYPE_UC_SUN;
+		case DucoDiscovery::NODE_TYPE_CODE_UC_VC:
+			return DucoDiscovery::NODE_TYPE_UC_VC;
+		case DucoDiscovery::NODE_TYPE_CODE_MULTI_ZONE:
+			return DucoDiscovery::NODE_TYPE_MULTI_ZONE;
+		case DucoDiscovery::NODE_TYPE_CODE_BOX_RH:
+			return DucoDiscovery::NODE_TYPE_BOX_RH;
+		case DucoDiscovery::NODE_TYPE_CODE_BOX_CO2:
+			return DucoDiscovery::NODE_TYPE_BOX_CO2;
+		case DucoDiscovery::NODE_TYPE_CODE_RELAY:
+			return DucoDiscovery::NODE_TYPE_RELAY;
+		case DucoDiscovery::NODE_TYPE_CODE_WEATHER:
+			return DucoDiscovery::NODE_TYPE_WEATHER;
+		case DucoDiscovery::NODE_TYPE_CODE_MOTOR_MODBUS:
+			return DucoDiscovery::NODE_TYPE_MOTOR_MODBUS;
+		case DucoDiscovery::NODE_TYPE_CODE_DIGITAL_IN:
+			return DucoDiscovery::NODE_TYPE_DIGITAL_IN;
+		case DucoDiscovery::NODE_TYPE_CODE_DIGITAL_OUT:
+			return DucoDiscovery::NODE_TYPE_DIGITAL_OUT;
+		case DucoDiscovery::NODE_TYPE_CODE_RELAY_MODBUS:
+			return DucoDiscovery::NODE_TYPE_RELAY_MODBUS;
+		case DucoDiscovery::NODE_TYPE_CODE_PERILEX:
+			return DucoDiscovery::NODE_TYPE_PERILEX;
+		case DucoDiscovery::NODE_TYPE_CODE_RELAY_OUT:
+			return DucoDiscovery::NODE_TYPE_RELAY_OUT;    
+    case DucoDiscovery::NODE_TYPE_UNKNOWN;
+			return DucoDiscovery::NODE_TYPE_UNKNOWN;   
+    
     default:
       return DucoDiscovery::NODE_TYPE_UNKNOWN;
   }
