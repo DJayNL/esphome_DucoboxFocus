@@ -28,6 +28,7 @@ UNIT_DAYS = "d"
 
 CONF_FILTER_REMAINING = "filter_remaining"
 CONF_FLOW_LEVEL = "flow_level"
+CONF_FLOW_LEVEL_VALVE  "flow_level_valve"
 CONF_TIME_REMAINING = "time_remaining"
 CONF_BYPASS = "bypass"
 CONF_TEMPERATURE_ODA = "temperature_oda"
@@ -60,6 +61,9 @@ DucoFilterRemainingSensor = duco_ns.class_(
 )
 DucoFlowLevelSensor = duco_ns.class_(
     "DucoFlowLevelSensor", cg.PollingComponent, sensor.Sensor
+)
+DucoValveFlowLevelSensor = duco_ns.class_(
+    "DucoValveFlowLevelSensor", cg.PollingComponent, sensor.Sensor
 )
 DucoStateTimeRemainingSensor = duco_ns.class_(
     "DucoStateTimeRemainingSensor", cg.PollingComponent, sensor.Sensor
@@ -107,6 +111,21 @@ CONFIG_SCHEMA = cv.Schema(
             .extend(
                 {
                     cv.GenerateID(): cv.declare_id(DucoHumiditySensor),
+                    cv.Required(CONF_ADDRESS): cv.int_range(0, 68),
+                }
+            )
+            .extend(cv.polling_component_schema("60s"))
+        ),
+        cv.Optional(CONF_FLOW_LEVEL_VALVE): cv.ensure_list(
+            sensor.sensor_schema(
+                unit_of_measurement=UNIT_PERCENT,
+                accuracy_decimals=0,
+                device_class=DEVICE_CLASS_EMPTY,
+                state_class=STATE_CLASS_MEASUREMENT,
+            )
+            .extend(
+                {
+                    cv.GenerateID(): cv.declare_id(DucoValveFlowLevelSensor),
                     cv.Required(CONF_ADDRESS): cv.int_range(0, 68),
                 }
             )
@@ -206,6 +225,14 @@ async def to_code(config):
             await sensor.register_sensor(sensvar, temperature_sensor_config)
             cg.add(sensvar.set_parent(parent))
             cg.add(sensvar.set_address(temperature_sensor_config[CONF_ADDRESS]))
+
+    if CONF_FLOW_LEVEL_VALVE in config:
+        for flow_level_valve_config in config[CONF_FLOW_LEVEL_VALVE]:
+            sensvar = cg.new_Pvariable(flow_level_valve_config[CONF_ID])
+            await cg.register_component(sensvar, flow_level_valve_config)
+            await sensor.register_sensor(sensvar, flow_level_valve_config)
+            cg.add(sensvar.set_parent(parent))
+            cg.add(sensvar.set_address(flow_level_valve_config[CONF_ADDRESS]))
 
     if CONF_FILTER_REMAINING in config:
         filter_remaining_config = config[CONF_FILTER_REMAINING]
