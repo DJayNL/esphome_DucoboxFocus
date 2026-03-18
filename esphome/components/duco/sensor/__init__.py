@@ -72,6 +72,9 @@ DucoFlowLevelValve2Sensor = duco_ns.class_(
 DucoStateTimeRemainingSensor = duco_ns.class_(
     "DucoStateTimeRemainingSensor", cg.PollingComponent, sensor.Sensor
 )
+DucoScannerSensor = duco_ns.class_(
+    "DucoScannerSensor", cg.PollingComponent, sensor.Sensor
+)
 
 CONFIG_SCHEMA = cv.Schema(
     {
@@ -89,6 +92,11 @@ CONFIG_SCHEMA = cv.Schema(
                 }
             )
             .extend(cv.polling_component_schema("60s"))
+        ),
+        cv.Optional("scanner"): sensor.sensor_schema().extend(
+            {
+                cv.Required(CONF_ADDRESS): cv.hex_uint8_t,
+            }
         ),
         cv.Optional(CONF_TEMPERATURE): cv.ensure_list(
             sensor.sensor_schema(
@@ -260,6 +268,14 @@ async def to_code(config):
             await sensor.register_sensor(sensvar, flow_level_valve2_config)
             cg.add(sensvar.set_parent(parent))
             cg.add(sensvar.set_address(flow_level_valve2_config[CONF_ADDRESS]))
+
+    if "scanner" in config:
+    conf = config["scanner"]
+    sens = await sensor.new_sensor(conf)
+
+    cg.add(sens.set_address(conf[CONF_ADDRESS]))
+    await cg.register_component(sens, conf)
+    await duco.register_device(sens)
             
     if CONF_FILTER_REMAINING in config:
         filter_remaining_config = config[CONF_FILTER_REMAINING]
