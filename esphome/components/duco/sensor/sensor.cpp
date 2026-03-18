@@ -292,5 +292,66 @@ void DucoStateTimeRemainingSensor::receive_response(const DucoMessage &message) 
   }
 }
 
+void DucoScannerSensor::setup() {}
+
+void DucoScannerSensor::update() {
+  DucoMessage message;
+  message.function = 0x10;
+
+  message.data = {0x01, address_, 0x00, current_reg_, sub_index_};
+
+  ESP_LOGD("duco_scan", "Request reg 0x%02X sub 0x%02X",
+           current_reg_, sub_index_);
+
+  this->parent_->send(message, this);
+}
+
+float DucoScannerSensor::get_setup_priority() const {
+  return setup_priority::BUS - 2.0f;
+}
+
+void DucoScannerSensor::receive_response(const DucoMessage &message) {
+  if (message.function == 0x12) {
+
+    ESP_LOGD("duco_scan", "Response reg 0x%02X sub 0x%02X (len %d):",
+             current_reg_, sub_index_, message.data.size());
+
+    std::string raw = "";
+    for (auto b : message.data) {
+      char buf[4];
+      sprintf(buf, "%02X ", b);
+      raw += buf;
+    }
+
+    ESP_LOGD("duco_scan", "%s", raw.c_str());
+
+    // Optional: publish something so HA shows activity
+    publish_state(current_reg_);
+
+    // ---- ADVANCE SCAN ----
+
+    // First toggle sub-index
+    if (sub_index_ == 0x01) {
+      sub_index_ = 0x02;
+    } else {
+      sub_index_ = 0x01;
+
+      // Move to next register only after both subs tested
+      current_reg_++;
+
+      if (current_reg_ > reg_end_) {
+        current_reg_ = reg_start_;
+        ESP_LOGD("duco_scan", "---- restart scan ----");
+      }
+    }
+
+    this->parent_->stop_waiting(message.id);
+  }
+}
+
+void DucoScannerSensor::set_address(uint8_t address) {
+  this->address_ = address;
+}
+
 }  // namespace duco
 }  // namespace esphome
