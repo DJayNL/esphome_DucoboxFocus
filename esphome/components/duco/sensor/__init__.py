@@ -64,10 +64,10 @@ DucoFlowLevelSensor = duco_ns.class_(
     "DucoFlowLevelSensor", cg.PollingComponent, sensor.Sensor
 )
 DucoFlowLevelValve1Sensor = duco_ns.class_(
-    "DucoFLowLevelValve1Sensor", cg.PollingComponent, sensor.Sensor
+    "DucoFlowLevelValve1Sensor", cg.PollingComponent, sensor.Sensor
 )
 DucoFlowLevelValve2Sensor = duco_ns.class_(
-    "DucoFLowLevelValve2Sensor", cg.PollingComponent, sensor.Sensor
+    "DucoFlowLevelValve2Sensor", cg.PollingComponent, sensor.Sensor
 )
 DucoStateTimeRemainingSensor = duco_ns.class_(
     "DucoStateTimeRemainingSensor", cg.PollingComponent, sensor.Sensor
