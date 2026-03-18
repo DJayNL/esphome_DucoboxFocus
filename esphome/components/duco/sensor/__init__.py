@@ -98,8 +98,8 @@ CONFIG_SCHEMA = cv.Schema(
                 cv.Required(CONF_ADDRESS): cv.hex_uint8_t,
             }
             )
-            .extend(cv.polling_component_schema("60s"))
-        ),
+            .extend(cv.polling_component_schema("60s")),
+        
         cv.Optional(CONF_TEMPERATURE): cv.ensure_list(
             sensor.sensor_schema(
                 unit_of_measurement=UNIT_CELSIUS,
