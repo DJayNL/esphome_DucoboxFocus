@@ -74,7 +74,6 @@ DucoStateTimeRemainingSensor = duco_ns.class_(
 )
 DucoScannerSensor = duco_ns.class_(
     "DucoScannerSensor",
-    DucoDevice,
     cg.PollingComponent,
     sensor.Sensor,
 )
