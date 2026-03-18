@@ -106,15 +106,23 @@ float DucoFlowLevelValve1Sensor::get_setup_priority() const {
 }
 
 void DucoFlowLevelValve1Sensor::receive_response(const DucoMessage &message) {
-  // Log full raw response
-  ESP_LOGD("duco_raw", "Response (func 0x%02X, len %d):", message.function, message.data.size());
+  if (message.function == 0x12) {
 
-  std::string raw = "";
-  for (auto b : message.data) {
-    char buf[4];
-    sprintf(buf, "%02X ", b);
-    raw += buf;
-  }
+    // Log full raw response
+    ESP_LOGD("duco_raw", "Response (func 0x%02X, len %d):", message.function, message.data.size());
+
+    std::string raw = "";
+    for (auto b : message.data) {
+      char buf[4];
+      sprintf(buf, "%02X ", b);
+      raw += buf;
+    }
+    ESP_LOGD("duco_raw", "%s", raw.c_str());
+
+    // Optional: also log indexed bytes (VERY useful)
+    for (size_t i = 0; i < message.data.size(); i++) {
+      ESP_LOGD("duco_raw", "[%02d] = 0x%02X", i, message.data[i]);
+    }
 
     this->parent_->stop_waiting(message.id);
   }
@@ -137,15 +145,24 @@ float DucoFlowLevelValve2Sensor::get_setup_priority() const {
 }
 
 void DucoFlowLevelValve2Sensor::receive_response(const DucoMessage &message) {
-  // Log full raw response
-  ESP_LOGD("duco_raw", "Response (func 0x%02X, len %d):", message.function, message.data.size());
+  if (message.function == 0x12) {
 
-  std::string raw = "";
-  for (auto b : message.data) {
-    char buf[4];
-    sprintf(buf, "%02X ", b);
-    raw += buf;
-  }
+    // Log full raw response
+    ESP_LOGD("duco_raw", "Response (func 0x%02X, len %d):", message.function, message.data.size());
+
+    std::string raw = "";
+    for (auto b : message.data) {
+      char buf[4];
+      sprintf(buf, "%02X ", b);
+      raw += buf;
+    }
+    ESP_LOGD("duco_raw", "%s", raw.c_str());
+
+    // Optional: also log indexed bytes (VERY useful)
+    for (size_t i = 0; i < message.data.size(); i++) {
+      ESP_LOGD("duco_raw", "[%02d] = 0x%02X", i, message.data[i]);
+    }
+
     this->parent_->stop_waiting(message.id);
   }
 }
