@@ -106,9 +106,15 @@ float DucoFlowLevelValve1Sensor::get_setup_priority() const {
 }
 
 void DucoFlowLevelValve1Sensor::receive_response(const DucoMessage &message) {
-  if (message.function == 0x12) {
-    uint16_t flow_level = message.data[9];
-    publish_state(flow_level);
+  // Log full raw response
+  ESP_LOGD("duco_raw", "Response (func 0x%02X, len %d):", message.function, message.data.size());
+
+  std::string raw = "";
+  for (auto b : message.data) {
+    char buf[4];
+    sprintf(buf, "%02X ", b);
+    raw += buf;
+  }
 
     this->parent_->stop_waiting(message.id);
   }
@@ -131,10 +137,15 @@ float DucoFlowLevelValve2Sensor::get_setup_priority() const {
 }
 
 void DucoFlowLevelValve2Sensor::receive_response(const DucoMessage &message) {
-  if (message.function == 0x0e) {
-    uint16_t _level = message.data[2];
-    publish_state(_level);
+  // Log full raw response
+  ESP_LOGD("duco_raw", "Response (func 0x%02X, len %d):", message.function, message.data.size());
 
+  std::string raw = "";
+  for (auto b : message.data) {
+    char buf[4];
+    sprintf(buf, "%02X ", b);
+    raw += buf;
+  }
     this->parent_->stop_waiting(message.id);
   }
 }
