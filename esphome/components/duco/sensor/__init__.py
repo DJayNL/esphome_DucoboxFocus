@@ -63,11 +63,11 @@ DucoFilterRemainingSensor = duco_ns.class_(
 DucoFlowLevelSensor = duco_ns.class_(
     "DucoFlowLevelSensor", cg.PollingComponent, sensor.Sensor
 )
-DucoValveFlowLevelSensor1 = duco_ns.class_(
-    "DucoValveFlowLevelSensor1", cg.PollingComponent, sensor.Sensor
+DucoFLowLevelValve1Sensor = duco_ns.class_(
+    "DucoFLowLevelValve1Sensor", cg.PollingComponent, sensor.Sensor
 )
-DucoValveFlowLevelSensor2 = duco_ns.class_(
-    "DucoValveFlowLevelSensor2", cg.PollingComponent, sensor.Sensor
+DucoFLowLevelValve2Sensor = duco_ns.class_(
+    "DucoFLowLevelValve2Sensor", cg.PollingComponent, sensor.Sensor
 )
 DucoStateTimeRemainingSensor = duco_ns.class_(
     "DucoStateTimeRemainingSensor", cg.PollingComponent, sensor.Sensor
@@ -129,7 +129,7 @@ CONFIG_SCHEMA = cv.Schema(
             )
             .extend(
                 {
-                    cv.GenerateID(): cv.declare_id(DucoValveFlowLevelSensor1),
+                    cv.GenerateID(): cv.declare_id(DucoFLowLevelValve1Sensor),
                     cv.Required(CONF_ADDRESS): cv.int_range(0, 68),
                 }
             )
@@ -144,7 +144,7 @@ CONFIG_SCHEMA = cv.Schema(
             )
             .extend(
                 {
-                    cv.GenerateID(): cv.declare_id(DucoValveFlowLevelSensor2),
+                    cv.GenerateID(): cv.declare_id(DucoFLowLevelValve2Sensor),
                     cv.Required(CONF_ADDRESS): cv.int_range(0, 68),
                 }
             )
