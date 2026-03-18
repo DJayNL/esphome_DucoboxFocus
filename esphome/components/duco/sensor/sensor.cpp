@@ -108,7 +108,7 @@ float DucoFlowLevelValve1Sensor::get_setup_priority() const {
 void DucoFlowLevelValve1Sensor::receive_response(const DucoMessage &message) {
   if (message.function == 0x12) {
     uint16_t flow_level = (message.data[9] << 8) + message.data[8];
-      publish_state(flow_level);
+    publish_state(flow_level);
 
     this->parent_->stop_waiting(message.id);
   }
@@ -132,8 +132,8 @@ float DucoFlowLevelValve2Sensor::get_setup_priority() const {
 
 void DucoFlowLevelValve2Sensor::receive_response(const DucoMessage &message) {
   if (message.function == 0x12) {
-    uint16_t flow_level = (message.data[8];
-      publish_state(flow_level);
+    uint16_t flow_level = message.data[8];
+    publish_state(flow_level);
 
     this->parent_->stop_waiting(message.id);
   }
