@@ -246,20 +246,20 @@ async def to_code(config):
             cg.add(sensvar.set_address(temperature_sensor_config[CONF_ADDRESS]))
 
     if CONF_FLOW_LEVEL_VALVE1 in config:
-        for flow_level_valve_config1 in config[CONF_FLOW_LEVEL_VALVE1]:
-            sensvar = cg.new_Pvariable(flow_level_valve_config1[CONF_ID])
-            await cg.register_component(sensvar, flow_level_valve_config1)
-            await sensor.register_sensor(sensvar, flow_level_valve_config1)
+        for flow_level_valve1_config in config[CONF_FLOW_LEVEL_VALVE1]:
+            sensvar = cg.new_Pvariable(flow_level_valve1_config[CONF_ID])
+            await cg.register_component(sensvar, flow_level_valve1_config)
+            await sensor.register_sensor(sensvar, flow_level_valve1_config)
             cg.add(sensvar.set_parent(parent))
-            cg.add(sensvar.set_address(flow_level_valve_config1[CONF_ADDRESS]))
+            cg.add(sensvar.set_address(flow_level_valve1_config[CONF_ADDRESS]))
             
     if CONF_FLOW_LEVEL_VALVE2 in config:
-        for flow_level_valve_config2 in config[CONF_FLOW_LEVEL_VALVE2]:
-            sensvar = cg.new_Pvariable(flow_level_valve_config2[CONF_ID])
-            await cg.register_component(sensvar, flow_level_valve_config2)
-            await sensor.register_sensor(sensvar, flow_level_valve_config2)
+        for flow_level_valve2_config in config[CONF_FLOW_LEVEL_VALVE2]:
+            sensvar = cg.new_Pvariable(flow_level_valve2_config[CONF_ID])
+            await cg.register_component(sensvar, flow_level_valve2_config)
+            await sensor.register_sensor(sensvar, flow_level_valve2_config)
             cg.add(sensvar.set_parent(parent))
-            cg.add(sensvar.set_address(flow_level_valve_config2[CONF_ADDRESS]))
+            cg.add(sensvar.set_address(flow_level_valve2_config[CONF_ADDRESS]))
             
     if CONF_FILTER_REMAINING in config:
         filter_remaining_config = config[CONF_FILTER_REMAINING]
