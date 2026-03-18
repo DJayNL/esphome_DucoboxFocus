@@ -28,7 +28,8 @@ UNIT_DAYS = "d"
 
 CONF_FILTER_REMAINING = "filter_remaining"
 CONF_FLOW_LEVEL = "flow_level"
-CONF_FLOW_LEVEL_VALVE  "flow_level_valve"
+CONF_FLOW_LEVEL_VALVE1  "flow_level_valve1"
+CONF_FLOW_LEVEL_VALVE2  "flow_level_valve2"
 CONF_TIME_REMAINING = "time_remaining"
 CONF_BYPASS = "bypass"
 CONF_TEMPERATURE_ODA = "temperature_oda"
@@ -62,8 +63,11 @@ DucoFilterRemainingSensor = duco_ns.class_(
 DucoFlowLevelSensor = duco_ns.class_(
     "DucoFlowLevelSensor", cg.PollingComponent, sensor.Sensor
 )
-DucoValveFlowLevelSensor = duco_ns.class_(
-    "DucoValveFlowLevelSensor", cg.PollingComponent, sensor.Sensor
+DucoValveFlowLevelSensor1 = duco_ns.class_(
+    "DucoValveFlowLevelSensor1", cg.PollingComponent, sensor.Sensor
+)
+DucoValveFlowLevelSensor2 = duco_ns.class_(
+    "DucoValveFlowLevelSensor2", cg.PollingComponent, sensor.Sensor
 )
 DucoStateTimeRemainingSensor = duco_ns.class_(
     "DucoStateTimeRemainingSensor", cg.PollingComponent, sensor.Sensor
@@ -116,7 +120,7 @@ CONFIG_SCHEMA = cv.Schema(
             )
             .extend(cv.polling_component_schema("60s"))
         ),
-        cv.Optional(CONF_FLOW_LEVEL_VALVE): cv.ensure_list(
+        cv.Optional(CONF_FLOW_LEVEL_VALVE1): cv.ensure_list(
             sensor.sensor_schema(
                 unit_of_measurement=UNIT_PERCENT,
                 accuracy_decimals=0,
@@ -125,12 +129,27 @@ CONFIG_SCHEMA = cv.Schema(
             )
             .extend(
                 {
-                    cv.GenerateID(): cv.declare_id(DucoValveFlowLevelSensor),
+                    cv.GenerateID(): cv.declare_id(DucoValveFlowLevelSensor1),
                     cv.Required(CONF_ADDRESS): cv.int_range(0, 68),
                 }
             )
             .extend(cv.polling_component_schema("60s"))
         ),
+        cv.Optional(CONF_FLOW_LEVEL_VALVE2): cv.ensure_list(
+            sensor.sensor_schema(
+                unit_of_measurement=UNIT_PERCENT,
+                accuracy_decimals=0,
+                device_class=DEVICE_CLASS_EMPTY,
+                state_class=STATE_CLASS_MEASUREMENT,
+            )
+            .extend(
+                {
+                    cv.GenerateID(): cv.declare_id(DucoValveFlowLevelSensor2),
+                    cv.Required(CONF_ADDRESS): cv.int_range(0, 68),
+                }
+            )
+            .extend(cv.polling_component_schema("60s"))
+        ),        
         cv.Optional(CONF_FILTER_REMAINING): sensor.sensor_schema(
             unit_of_measurement=UNIT_DAYS,
             accuracy_decimals=0,
@@ -226,14 +245,22 @@ async def to_code(config):
             cg.add(sensvar.set_parent(parent))
             cg.add(sensvar.set_address(temperature_sensor_config[CONF_ADDRESS]))
 
-    if CONF_FLOW_LEVEL_VALVE in config:
-        for flow_level_valve_config in config[CONF_FLOW_LEVEL_VALVE]:
-            sensvar = cg.new_Pvariable(flow_level_valve_config[CONF_ID])
-            await cg.register_component(sensvar, flow_level_valve_config)
-            await sensor.register_sensor(sensvar, flow_level_valve_config)
+    if CONF_FLOW_LEVEL_VALVE1 in config:
+        for flow_level_valve_config1 in config[CONF_FLOW_LEVEL_VALVE1]:
+            sensvar = cg.new_Pvariable(flow_level_valve_config1[CONF_ID])
+            await cg.register_component(sensvar, flow_level_valve_config1)
+            await sensor.register_sensor(sensvar, flow_level_valve_config1)
             cg.add(sensvar.set_parent(parent))
-            cg.add(sensvar.set_address(flow_level_valve_config[CONF_ADDRESS]))
-
+            cg.add(sensvar.set_address(flow_level_valve_config1[CONF_ADDRESS]))
+            
+    if CONF_FLOW_LEVEL_VALVE2 in config:
+        for flow_level_valve_config2 in config[CONF_FLOW_LEVEL_VALVE2]:
+            sensvar = cg.new_Pvariable(flow_level_valve_config2[CONF_ID])
+            await cg.register_component(sensvar, flow_level_valve_config2)
+            await sensor.register_sensor(sensvar, flow_level_valve_config2)
+            cg.add(sensvar.set_parent(parent))
+            cg.add(sensvar.set_address(flow_level_valve_config2[CONF_ADDRESS]))
+            
     if CONF_FILTER_REMAINING in config:
         filter_remaining_config = config[CONF_FILTER_REMAINING]
         sensvar = cg.new_Pvariable(filter_remaining_config[CONF_ID])
