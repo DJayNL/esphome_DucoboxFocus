@@ -270,12 +270,12 @@ async def to_code(config):
             cg.add(sensvar.set_address(flow_level_valve2_config[CONF_ADDRESS]))
 
     if "scanner" in config:
-    conf = config["scanner"]
-    sens = await sensor.new_sensor(conf)
+        conf = config["scanner"]
+        sens = await sensor.new_sensor(conf)
 
-    cg.add(sens.set_address(conf[CONF_ADDRESS]))
-    await cg.register_component(sens, conf)
-    await duco.register_device(sens)
+        cg.add(sens.set_address(conf[CONF_ADDRESS]))
+        await cg.register_component(sens, conf)
+        await duco.register_device(sens)
             
     if CONF_FILTER_REMAINING in config:
         filter_remaining_config = config[CONF_FILTER_REMAINING]
