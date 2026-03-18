@@ -91,21 +91,21 @@ void DucoTemperatureSensor::receive_response(const DucoMessage &message) {
 
 void DucoTemperatureSensor::set_address(uint8_t address) { this->address_ = address; }
 
-void DucoValveFlowLevelSensor1::setup() {}
+void DucoFlowLevelValve1Sensor::setup() {}
 
-void DucoValveFlowLevelSensor1::update() {
+void DucoFlowLevelValve1Sensor::update() {
   DucoMessage message;
   message.function = 0x10;
   message.data = {0x01, address_, 0x00, 0x49, 0x04};
   this->parent_->send(message, this);
 }
 
-float DucoValveFlowLevelSensor1::get_setup_priority() const {
+float DucoFlowLevelValve1Sensor::get_setup_priority() const {
   // After DUCO
   return setup_priority::BUS - 2.0f;
 }
 
-void DucoValveFlowLevelSensor1::receive_response(const DucoMessage &message) {
+void DucoFlowLevelValve1Sensor::receive_response(const DucoMessage &message) {
   if (message.function == 0x12) {
     uint16_t flow_level = (message.data[9] << 8) + message.data[8];
       publish_state(flow_level);
@@ -114,23 +114,23 @@ void DucoValveFlowLevelSensor1::receive_response(const DucoMessage &message) {
   }
 }
 
-void DucoValveFlowLevelSensor1::set_address(uint8_t address) { this->address_ = address; }
+void DucoFlowLevelValve1Sensor::set_address(uint8_t address) { this->address_ = address; }
 
-void DucoValveFlowLevelSensor2::setup() {}
+void DucoFlowLevelValve2Sensor::setup() {}
 
-void DucoValveFlowLevelSensor2::update() {
+void DucoFlowLevelValve2Sensor::update() {
   DucoMessage message;
   message.function = 0x10;
   message.data = {0x01, address_, 0x00, 0x49, 0x04};
   this->parent_->send(message, this);
 }
 
-float DucoValveFlowLevelSensor2::get_setup_priority() const {
+float DucoFlowLevelValve2Sensor::get_setup_priority() const {
   // After DUCO
   return setup_priority::BUS - 2.0f;
 }
 
-void DucoValveFlowLevelSensor2::receive_response(const DucoMessage &message) {
+void DucoFlowLevelValve2Sensor::receive_response(const DucoMessage &message) {
   if (message.function == 0x12) {
     uint16_t flow_level = (message.data[8];
       publish_state(flow_level);
@@ -139,7 +139,7 @@ void DucoValveFlowLevelSensor2::receive_response(const DucoMessage &message) {
   }
 }
 
-void DucoValveFlowLevelSensor2::set_address(uint8_t address) { this->address_ = address; }
+void DucoFlowLevelValve2Sensor::set_address(uint8_t address) { this->address_ = address; }
 
 void DucoBoxTemperatureSensor::setup() {}
 
