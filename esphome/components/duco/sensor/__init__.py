@@ -129,7 +129,7 @@ CONFIG_SCHEMA = cv.Schema(
             )
             .extend(
                 {
-                    cv.GenerateID(): cv.declare_id(DucoFLowLevelValve1Sensor),
+                    cv.GenerateID(): cv.declare_id(DucoFlowLevelValve1Sensor),
                     cv.Required(CONF_ADDRESS): cv.int_range(0, 68),
                 }
             )
@@ -144,7 +144,7 @@ CONFIG_SCHEMA = cv.Schema(
             )
             .extend(
                 {
-                    cv.GenerateID(): cv.declare_id(DucoFLowLevelValve2Sensor),
+                    cv.GenerateID(): cv.declare_id(DucoFlowLevelValve2Sensor),
                     cv.Required(CONF_ADDRESS): cv.int_range(0, 68),
                 }
             )
