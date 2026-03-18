@@ -53,7 +53,7 @@ class DucoTemperatureSensor : public DucoDevice, public PollingComponent, public
   uint8_t address_;
 };
 
-class DucoValveFlowLevelSensor1 : public DucoDevice, public PollingComponent, public sensor::Sensor {
+class DucoFLowLevelValve1Sensor : public DucoDevice, public PollingComponent, public sensor::Sensor {
  public:
   void setup() override;
   void update() override;
@@ -68,7 +68,7 @@ class DucoValveFlowLevelSensor1 : public DucoDevice, public PollingComponent, pu
   uint8_t address_;
 };
 
-class DucoValveFlowLevelSensor2 : public DucoDevice, public PollingComponent, public sensor::Sensor {
+class DucoFLowLevelValve2Sensor : public DucoDevice, public PollingComponent, public sensor::Sensor {
  public:
   void setup() override;
   void update() override;
