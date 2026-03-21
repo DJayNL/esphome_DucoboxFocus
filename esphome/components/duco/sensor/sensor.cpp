@@ -95,7 +95,7 @@ void DucoFlowLevelValve1Sensor::setup() {}
 
 void DucoFlowLevelValve1Sensor::update() {
   DucoMessage message;
-  message.function = 0x12;
+  message.function = 0x10;
   message.data = {0x01, address_, 0x00, 0x4A, 0x04};
   this->parent_->send(message, this);
 }
@@ -134,7 +134,7 @@ void DucoFlowLevelValve2Sensor::setup() {}
 
 void DucoFlowLevelValve2Sensor::update() {
   DucoMessage message;
-  message.function = 0x12;
+  message.function = 0x10;
   message.data = {0x01, address_, 0x00, 0x49, 0x04};
   this->parent_->send(message, this);
 }
